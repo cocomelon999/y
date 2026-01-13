@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Untuk Sabrina</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bgA: #ffd0e9;  /* pink lembut */
+      --bgB: #bfe7ff;  /* biru lembut */
+      --ink: #0b1220;
+      --muted: rgba(11,18,32,.62);
+      --card: rgba(255,255,255,.72);
+      --stroke: rgba(255,255,255,.46);
+      --shadow: 0 24px 70px rgba(8,14,28,.18);
+      --shadow2: 0 16px 42px rgba(8,14,28,.14);
+      --radius: 22px;
+      --ribbonA: #ff7fbf;
+      --ribbonB: #60b6ff;
+    }
+
+    *{ box-sizing:border-box; }
+    html, body{ height:100%; }
+    body{
+      margin:0;
+      color:var(--ink);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      overflow-x:hidden;
+      background:
+        radial-gradient(900px 600px at 15% 15%, rgba(255,255,255,.55), transparent 60%),
+        radial-gradient(900px 600px at 85% 25%, rgba(255,255,255,.45), transparent 60%),
+        linear-gradient(120deg, var(--bgA), var(--bgB));
+    }
+
+    /* background motion: halus banget, nggak norak */
+    .bg-flow{
+      position:fixed;
+      inset:-20%;
+      background:
+        radial-gradient(700px 420px at 20% 30%, rgba(255,127,191,.18), transparent 65%),
+        radial-gradient(780px 480px at 80% 35%, rgba(96,182,255,.18), transparent 66%),
+        radial-gradient(650px 420px at 55% 85%, rgba(255,255,255,.20), transparent 66%);
+      filter: blur(14px);
+      animation: drift 16s ease-in-out infinite alternate;
+      pointer-events:none;
+      z-index:-1;
+    }
+    @keyframes drift{
+      from{ transform: translate3d(-2%, -1%, 0) scale(1.02); }
+      to  { transform: translate3d(2%,  1.5%,0) scale(1.05); }
+    }
+
+    .wrap{
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 28px 18px 90px;
+    }
+
+    /* top mini nav */
+    .topbar{
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+      display:flex;
+      justify-content:center;
+      pointer-events:none;
+    }
+    .pill{
+      pointer-events:auto;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      padding:10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.52);
+      border: 1px solid rgba(255,255,255,.55);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(8,14,28,.10);
+      width: min(920px, 100%);
+      justify-content:space-between;
+    }
+    .pill .brand{
+      display:flex; align-items:center; gap:10px;
+      min-width: 160px;
+    }
+    .mark{
+      width:12px; height:12px; border-radius:99px;
+      background: linear-gradient(45deg, var(--ribbonA), var(--ribbonB));
+      box-shadow: 0 0 0 4px rgba(255,255,255,.55);
+    }
+    .brand span{
+      font-size:13px;
+      color: rgba(11,18,32,.78);
+      letter-spacing:.2px;
+    }
+
+    .nav{
+      display:flex; gap:10px; flex-wrap:wrap;
+      justify-content:center;
+    }
+    .nav a{
+      font-size:12.5px;
+      color: rgba(11,18,32,.70);
+      text-decoration:none;
+      padding:8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(11,18,32,.10);
+      background: rgba(255,255,255,.40);
+      transition: .18s transform, .18s background;
+    }
+    .nav a:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.60);
+    }
+
+    .ctl{
+      display:flex; gap:10px; align-items:center;
+      min-width: 190px;
+      justify-content:flex-end;
+    }
+    .btn{
+      border: 0;
+      cursor: pointer;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(11,18,32,.08);
+      color: rgba(11,18,32,.75);
+      font-weight: 600;
+      font-size: 12.5px;
+      transition: .18s transform, .18s filter, .18s background;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.02); background: rgba(11,18,32,.10); }
+    .btn.primary{
+      background: linear-gradient(45deg, rgba(255,127,191,.95), rgba(96,182,255,.95));
+      color: white;
+      box-shadow: 0 14px 30px rgba(96,182,255,.18);
+    }
+
+    /* sections */
+    section{
+      padding: 68px 0;
+      scroll-margin-top: 110px;
+    }
+
+    .hero{
+  display:grid;
+  grid-template-columns: 1fr;
+}
+
+    @media (max-width: 900px){
+      .hero{ grid-template-columns: 1fr; }
+      .ctl{ min-width:auto; }
+      .pill{ justify-content:space-between; }
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      overflow:hidden;
+      position:relative;
+    }
+    .pad{ padding: 22px 22px; }
+
+    /* ribbon (elegan, bukan spam emoji) */
+    .ribbon{
+      position:absolute;
+      top:18px; left:18px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(255,255,255,.65);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 30px rgba(8,14,28,.10);
+    }
+    .ribbon i{
+      width: 18px; height: 10px;
+      display:inline-block;
+      border-radius: 999px;
+      background: linear-gradient(45deg, var(--ribbonA), var(--ribbonB));
+    }
+    .ribbon b{
+      font-size: 12.5px;
+      color: rgba(11,18,32,.78);
+      letter-spacing:.2px;
+      font-weight: 600;
+    }
+
+    .title{
+      font-family: Fraunces, serif;
+      letter-spacing: -0.02em;
+      font-size: clamp(34px, 4.5vw, 54px);
+      line-height:1.05;
+      margin: 44px 0 10px;
+      color: rgba(11,18,32,.94);
+    }
+    .subtitle{
+      margin:0;
+      color: var(--muted);
+      font-size: 15.2px;
+      line-height: 1.7;
+      max-width: 62ch;
+    }
+
+    .mini{
+      margin-top: 18px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .chip{
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: 12.5px;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(11,18,32,.10);
+      color: rgba(11,18,32,.72);
+    }
+    .hint{
+      font-size: 12.5px;
+      color: rgba(11,18,32,.58);
+    }
+
+    /* right side: photo preview with parallax-ish */
+    .preview{
+      min-height: 360px;
+      display:flex;
+      align-items:stretch;
+      justify-content:stretch;
+      position:relative;
+    }
+    .preview .frame{
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,.15)),
+        url('foto1.jpg') center/cover no-repeat;
+      transform: scale(1.03);
+      filter: saturate(1.06) contrast(1.02);
+    }
+    .preview .veil{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 380px at 50% 0%, rgba(255,127,191,.18), transparent 60%),
+        radial-gradient(900px 380px at 60% 100%, rgba(96,182,255,.18), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.22));
+      mix-blend-mode: overlay;
+    }
+    .preview .caption{
+      position:absolute;
+      left:18px; right:18px; bottom:18px;
+      padding:12px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.58);
+      border: 1px solid rgba(255,255,255,.65);
+      backdrop-filter: blur(14px);
+      color: rgba(11,18,32,.78);
+      box-shadow: var(--shadow2);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    .caption .kecil{ font-size:12.5px; }
+    .caption .tag{
+      font-size: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(11,18,32,.08);
+      color: rgba(11,18,32,.72);
+      border: 1px solid rgba(11,18,32,.10);
+      white-space:nowrap;
+    }
+
+    /* Photo story slider */
+    .story{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .storyTop{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .h2{
+      font-family: Fraunces, serif;
+      font-size: clamp(22px, 3.1vw, 32px);
+      margin:0;
+      color: rgba(11,18,32,.92);
+      letter-spacing:-.02em;
+    }
+    .desc{
+      margin: 8px 0 0;
+      color: rgba(11,18,32,.60);
+      line-height:1.7;
+      font-size: 14.5px;
+      max-width: 70ch;
+    }
+    .bar{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .bar .counter{
+      font-size: 12.5px;
+      color: rgba(11,18,32,.60);
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(11,18,32,.10);
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+    .bar button{
+      border:0;
+      cursor:pointer;
+      border-radius:999px;
+      padding: 10px 12px;
+      background: rgba(11,18,32,.08);
+      color: rgba(11,18,32,.78);
+      font-weight:700;
+      transition:.18s transform, .18s background;
+    }
+    .bar button:hover{ transform: translateY(-1px); background: rgba(11,18,32,.10); }
+
+    .rail{
+      display:flex;
+      gap: 14px;
+      overflow:auto;
+      padding: 10px 10px 14px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .rail::-webkit-scrollbar{ height: 10px; }
+    .rail::-webkit-scrollbar-thumb{
+      background: rgba(11,18,32,.18);
+      border-radius: 999px;
+    }
+
+    .shot{
+      flex: 0 0 min(360px, 82vw);
+      border-radius: 18px;
+      overflow:hidden;
+      scroll-snap-align: center;
+      position:relative;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(255,255,255,.65);
+      box-shadow: var(--shadow2);
+      cursor: zoom-in;
+      transform: translateZ(0);
+    }
+   .shot img{
+  width:100%;
+  height: 260px;
+  object-fit: contain;
+  background: #f5f5f7;
+  padding: 6px;
+  border-radius: 14px;
+}
+
+    .shot:hover img{ transform: scale(1.06); }
+    .shot .meta{
+      padding: 12px 12px 14px;
+      color: rgba(11,18,32,.72);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 10px;
+    }
+    .meta .lbl{
+      font-size: 12.5px;
+    }
+    .meta .dot{
+      width: 8px; height:8px; border-radius: 99px;
+      background: linear-gradient(45deg, var(--ribbonA), var(--ribbonB));
+      box-shadow: 0 0 0 4px rgba(255,255,255,.7);
+      flex: none;
+    }
+
+    /* interactive note */
+    .noteGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 900px){
+      .noteGrid{ grid-template-columns: 1fr; }
+    }
+    .box{
+      border-radius: 20px;
+      background: rgba(255,255,255,.58);
+      border: 1px solid rgba(255,255,255,.65);
+      box-shadow: var(--shadow2);
+      padding: 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .box:before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:
+        radial-gradient(400px 260px at 30% 30%, rgba(255,127,191,.16), transparent 60%),
+        radial-gradient(420px 280px at 80% 50%, rgba(96,182,255,.16), transparent 60%);
+      filter: blur(10px);
+      pointer-events:none;
+    }
+    .box > *{ position:relative; }
+
+    .q{
+      margin:0;
+      font-size: 14.5px;
+      color: rgba(11,18,32,.78);
+      line-height:1.7;
+    }
+    .choices{
+      margin-top: 12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .choices button{
+      border: 1px solid rgba(11,18,32,.10);
+      background: rgba(255,255,255,.64);
+      color: rgba(11,18,32,.78);
+      font-weight:700;
+      padding: 10px 12px;
+      border-radius: 14px;
+      cursor:pointer;
+      transition:.18s transform, .18s background;
+    }
+    .choices button:hover{ transform: translateY(-1px); background: rgba(255,255,255,.82); }
+    .reply{
+      margin-top: 12px;
+      color: rgba(11,18,32,.66);
+      font-size: 14px;
+      line-height:1.7;
+      min-height: 44px;
+    }
+
+    /* letter reveal + typing */
+    .letter{
+      padding: 22px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(255,255,255,.68);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+    }
+    .letterHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom: 10px;
+    }
+    .letterHead .miniTitle{
+      font-family: Fraunces, serif;
+      font-size: 18px;
+      margin:0;
+      color: rgba(11,18,32,.90);
+      letter-spacing:-.01em;
+    }
+    .letterHead .tools{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .toggle{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      border-radius:999px;
+      padding:8px 10px;
+      background: rgba(11,18,32,.08);
+      color: rgba(11,18,32,.72);
+      border: 1px solid rgba(11,18,32,.10);
+      font-size: 12.5px;
+      user-select:none;
+    }
+    .switch{
+      width:40px; height:22px;
+      border-radius:999px;
+      background: rgba(255,255,255,.80);
+      border: 1px solid rgba(11,18,32,.10);
+      position:relative;
+      flex:none;
+    }
+    .knob{
+      position:absolute;
+      top:2px; left:2px;
+      width:18px; height:18px;
+      border-radius:99px;
+      background: linear-gradient(45deg, var(--ribbonA), var(--ribbonB));
+      transition: .18s transform;
+    }
+    .toggle.on .knob{ transform: translateX(18px); }
+
+    .typed{
+      margin: 10px 0 0;
+      color: rgba(11,18,32,.74);
+      line-height: 1.9;
+      font-size: 15px;
+      white-space: pre-wrap;
+    }
+    .caret{
+      display:inline-block;
+      width:10px;
+      animation: blink 1s step-end infinite;
+      opacity:.7;
+    }
+    @keyframes blink{ 50%{ opacity:0; } }
+
+    /* closing */
+    .closing{
+      text-align:center;
+      padding: 34px 22px;
+    }
+    .closing .big{
+      font-family: Fraunces, serif;
+      font-size: clamp(22px, 3.4vw, 34px);
+      margin:0 0 10px;
+      letter-spacing:-.02em;
+      color: rgba(11,18,32,.92);
+    }
+    .closing .small{
+      margin:0;
+      color: rgba(11,18,32,.62);
+      line-height:1.8;
+      font-size: 14.5px;
+      max-width: 70ch;
+      margin-inline:auto;
+    }
+
+    /* reveal on scroll */
+    .reveal{
+      opacity:0;
+      transform: translateY(10px);
+      transition: .7s ease;
+    }
+    .reveal.in{
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    /* lightbox */
+    .lightbox{
+      position:fixed;
+      inset:0;
+      background: rgba(8,14,28,.58);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      z-index: 60;
+    }
+    .lightbox.show{ display:flex; }
+    .lbCard{
+      width: min(980px, 100%);
+      border-radius: 22px;
+      overflow:hidden;
+      background: rgba(255,255,255,.85);
+      border: 1px solid rgba(255,255,255,.55);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 30px 90px rgba(8,14,28,.30);
+    }
+    .lbTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding: 12px 14px;
+      gap:10px;
+      color: rgba(11,18,32,.72);
+      font-size: 12.5px;
+    }
+    .lbTop button{
+      border:0;
+      cursor:pointer;
+      border-radius: 999px;
+      padding: 9px 12px;
+      background: rgba(11,18,32,.08);
+      color: rgba(11,18,32,.78);
+      font-weight:800;
+    }
+    .lbImg{
+      width:100%;
+      height: min(72vh, 640px);
+      object-fit: contain;
+      background: rgba(11,18,32,.04);
+      display:block;
+    }
+
+    /* audio button subtle */
+    .mutedDot{
+      width:7px; height:7px; border-radius:99px;
+      background: rgba(11,18,32,.35);
+      display:inline-block;
+      margin-left:6px;
+      vertical-align:middle;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-flow"></div>
+
+  <!-- optional music -->
+  <audio id="bgm" loop>
+  <source src="about-you.mp3" type="audio/mpeg">
+</audio>
+
+
+  <div class="topbar">
+    <div class="pill">
+      <div class="brand">
+        <span class="mark"></span>
+        <span>untuk <b>Sabrina</b> • Maaf</span>
+      </div>
+
+      <div class="nav">
+        <a href="#opening">Home</a>
+        <a href="#story">Foto</a>
+        <a href="#interact">Catatan</a>
+        <a href="#letter">Surat</a>
+        <a href="#end">Penutup</a>
+      </div>
+
+      <div class="ctl">
+        <button class="btn" id="btnAudio" aria-label="toggle audio">
+          Audio <span class="mutedDot" id="audDot"></span>
+        </button>
+        <button class="btn primary" id="btnStart">Mulai</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <!-- OPENING -->
+    <section id="opening">
+      <div class="hero">
+        <div class="card reveal">
+          <div class="ribbon"><i></i><b>🎀 Coquette </b></div>
+          <div class="pad">
+            <h1 class="title">Sabrina.</h1>
+            <p class="subtitle">
+              Aku ada surat buat kamu, maaf ga terlalu bagus. Semoga ini bisa menenangkan perasaan kamu ya, Sabrina yang... 
+            </p>
+
+            <div class="mini">
+              <span class="chip">Cantik</span>
+              <span class="chip">Pinter</span>
+              <span class="chip">Cerdas</span>
+              <span class="hint">hehee</span>
+            </div>
+          </div>
+        </div>
+
+    </section>
+
+    <!-- PHOTO STORY -->
+    <section id="story">
+      <div class="card reveal">
+        <div class="pad">
+          <div class="storyTop">
+            <div>
+              <h2 class="h2">Beberapa pap kamu</h2>
+              <p class="desc">
+               Calon istri ku emang cantik bangettt kannn.... aamiin
+              </p>
+            </div>
+            <div class="bar">
+              <span class="counter" id="counter">1 / 5</span>
+              <button id="prev" title="sebelumnya">‹</button>
+              <button id="next" title="berikutnya">›</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="rail" id="rail">
+          <div class="shot" data-src="foto1.jpg" data-label="Momen 01">
+            <img src="foto1.jpeg" alt="foto 1">
+            <div class="meta"><span class="lbl"><b>Yang paling anggun</b></span><span class="dot"></span></div>
+          </div>
+          <div class="shot" data-src="foto2.jpg" data-label="Momen 02">
+            <img src="foto2.jpeg" alt="foto 2">
+            <div class="meta"><span class="lbl"><b>Ini cuteeee bangeetttt aaaaa</b></span><span class="dot"></span></div>
+          </div>
+          <div class="shot" data-src="foto3.jpg" data-label="Momen 03">
+            <img src="foto3.jpeg" alt="foto 3">
+            <div class="meta"><span class="lbl"><b>Ini yang cemberut karna dipaksa pap, dan udah lepas kerudung</b></span><span class="dot"></span></div>
+          </div>
+          <div class="shot" data-src="foto4.jpg" data-label="Momen 04">
+            <img src="foto4.jpeg" alt="foto 4">
+            <div class="meta"><span class="lbl"><b>Ini matanyaaaa indahhhhh bangeeetttt jujurrrrr</b></span><span class="dot"></span></div>
+          </div>
+          <div class="shot" data-src="foto5.jpg" data-label="Momen 05">
+            <img src="foto5.jpeg" alt="foto 5">
+            <div class="meta"><span class="lbl"><b>Inii lucuuukkk bangetttt aku sukakkkkk</b></span><span class="dot"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE -->
+    <section id="interact">
+      <div class="noteGrid">
+        <div class="box reveal">
+          <h2 class="h2" style="margin:0 0 6px;">Beberapa sifatku yang mungkin nyakitin.</h2>
+          <p class="q">
+           Mungkin ini beberapa sifatku yang bikin hati kamu tersakiti
+          </p>
+
+          <div class="choices">
+            <button data-reply="Maafin aku yaa, aku sebenarnya gamau marah, aku cuma takut kehilangan kamu. aku minta maaf, aku kehilangan diriku waktu itu, aku sebenarnya ga kayak gitu kok.">Marah marah</button>
+            <button data-reply="Aku memang kebanyakan bicara, tapi aku gitu karna nyaman sama kamu, maaf kalo hal itu nyakitin buat kamu.">Banyak bicara</button>
+            <button data-reply="Aku minta maaf udah ngemis banyak hal ke kamu kayak waktu, perhatian, dsb.">Ngemis banyak hal</button>
+            <button data-reply="Aku minta maaf yang sebesar - besarnya soal ini, aku juga sakit hati waktu itu, karena kamu seperti berubah, tapi semua yang aku ucapin waktu itu aku ga serius kok.">Ketikan aku yang nyakitin</button>
+          </div>
+
+          <div class="reply" id="replyBox">
+            (COBA KAMU KLIK SATU PERSATU TULISAN ITU.)
+          </div>
+        </div>
+
+        <div class="box reveal">
+          <h2 class="h2" style="margin:0 0 6px;">Catatan kecil</h2>
+          <p class="q">
+           Mungkin masih banyak lagi hal yang menyakiti kamu, yang aku gabisa sebutin semuanya.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LETTER -->
+    <section id="letter">
+      <div class="card reveal">
+        <div class="pad">
+          <h2 class="h2">Surat dari aku</h2>
+          <p class="desc">Klik "Buka surat".</p>
+        </div>
+
+        <div class="pad" style="padding-top:0;">
+          <div class="letter">
+            <div class="letterHead">
+              <p class="miniTitle">Untuk Sabrina</p>
+              <div class="tools">
+                <div class="toggle" id="softMode" role="switch" aria-checked="false" tabindex="0" title="mode lembut">
+                    Mode Pelan
+                  <span class="switch"><span class="knob"></span></span>
+                </div>
+                <button class="btn primary" id="btnLetter">Buka surat</button>
+              </div>
+            </div>
+
+            <div class="typed" id="typed">
+              <span style="color: rgba(11,18,32,.55);">
+                (belum dibuka)
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- END -->
+    <section id="end">
+      <div class="card reveal">
+        <div class="closing">
+          <p class="big">Terima kasih sudah membaca.</p>
+          <p class="small">
+            Sekali lagi, aku minta maaf yaa, semoga ini lebih menenangkan hati kamu. Terima kasih sudah meluangkan waktu membaca halaman ini.
+Kalau hatimu masih memberi sedikit ruang, aku akan menjaganya pelan-pelan. Aku akan sayang kamu, bahkan kalo ada kehidupan lain, aku akan tetep milih kamu.
+          </p>
+          <div class="mini" style="justify-content:center; margin-top:18px;">
+            <span class="chip">— Adam</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lbCard">
+      <div class="lbTop">
+        <div id="lbLabel">Foto</div>
+        <button id="lbClose" aria-label="close">Tutup</button>
+      </div>
+      <img class="lbImg" id="lbImg" alt="foto besar">
+    </div>
+  </div>
+
+  <script>
+    // ====== CONFIG FOTO ======
+   const PHOTOS = ["foto1.jpeg","foto2.jpeg","foto3.jpeg","foto4.jpeg","foto5.jpeg"];
+
+    // ====== SURAT: ISI 5–10 KALIMAT DI SINI ======
+    // Tulis 5-10 kalimat kamu (Bahasa Indonesia). Boleh pakai baris baru.
+    const LETTER_NORMAL = [
+      "Sabrina,",
+      "",
+      "Disini, aku mau minta maaf atas segala hal yang udah ku lakuin yang membuat kamu keinget terus dikepala kamu.",
+      "Ketikan ketikan aku itu memang sangat nyakitin, aku juga sadar akan hal itu.",
+      "Aku ga seharusnya bilang itu ke kamu, aku mikirnya kamu udah ga cinta lagi ke aku.",
+      "Aku tahu ini berat buat kamu untuk melupakan hal itu, tapi aku bisa kok memperbaiki ini semuanya.",
+      "Aku janji kok gaakan mengulangi hal itu lagi, aku tahu ini ga mudah buat kita, tapi aku yakin dan aku harap kamu juga yakin.",
+      "Aku harap, kamu masih mau menerima dan mencintai aku lagi ya Sabrina, semoga kamu ga berubah yaa.",
+      "Aku bakal usahain kamu terus, sampe kita nikah.",
+      "Terlepas dari itu semua, aku sangat tulus mencintai kamu kok, aku dah berubah, udah jadi lebih dewasa seperti yang kamu suruh dulu.",
+      "Aku minta maaf jika masih banyak kurangnya, aku mintaa maaf banget.",
+      "Aku harap kamu percaya ke aku yaa Sabrina, aku bener bener sayang sama kamu.",
+      "",
+      "— Adam"
+    ].join("\n");
+
+    // Mode lembut: versi lebih halus (opsional). Kamu juga bisa isi sendiri nanti.
+    const LETTER_SOFT = [
+      "Sabrina,",
+      "",
+       "Disini, aku mau minta maaf atas segala hal yang udah ku lakuin yang membuat kamu keinget terus dikepala kamu.",
+      "Ketikan ketikan aku itu memang sangat nyakitin, aku juga sadar akan hal itu.",
+      "Aku ga seharusnya bilang itu ke kamu, aku mikirnya kamu udah ga cinta lagi ke aku.",
+      "Aku tahu ini berat buat kamu untuk melupakan hal itu, tapi aku bisa kok memperbaiki ini semuanya.",
+      "Aku janji kok gaakan mengulangi hal itu lagi, aku tahu ini ga mudah buat kita, tapi aku yakin dan aku harap kamu juga yakin.",
+      "Aku harap, kamu masih mau menerima dan mencintai aku lagi ya Sabrina, semoga kamu ga berubah yaa.",
+      "Aku bakal usahain kamu terus, sampe kita nikah.",
+      "Terlepas dari itu semua, aku sangat tulus mencintai kamu kok, aku dah berubah, udah jadi lebih dewasa seperti yang kamu suruh dulu.",
+      "Aku minta maaf jika masih banyak kurangnya, aku mintaa maaf banget.",
+      "Aku harap kamu percaya ke aku yaa Sabrina, aku bener bener sayang sama kamu.",
+      "",
+      "— Adam"
+    ].join("\n");
+
+    // ====== UTIL ======
+    const $ = (q) => document.querySelector(q);
+
+    // ====== REVEAL ON SCROLL ======
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add('in');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+     // ====== AUDIO toggle (opsional, tetap elegan) ======
+    const bgm = $("#bgm");
+    const btnAudio = $("#btnAudio");
+    const audDot = $("#audDot");
+    let playing = false;
+
+    // ====== START BUTTON: scroll ke opening halus ======
+   $("#btnStart").addEventListener("click", async () => {
+  document.querySelector("#opening").scrollIntoView({ behavior: "smooth" });
+  try{
+    await bgm.play();
+    playing = true;
+    setAudioUI();
+  }catch(e){}
+});
+
+
+   const preview = $("#previewFrame");
+let pvIndex = 0;
+
+function setPreview(i){
+  if(!preview) return;   // ⬅️ TAMBAHKAN INI
+  preview.style.backgroundImage =
+    `linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,.15)), url('${PHOTOS[i]}')`;
+}
+
+if(preview){
+  setPreview(0);
+  setInterval(()=>{
+    pvIndex = (pvIndex+1)%PHOTOS.length;
+    setPreview(pvIndex);
+  }, 7000);
+}
+
+
+    // ====== SLIDER BUTTONS ======
+    const rail = $("#rail");
+    const shots = Array.from(document.querySelectorAll(".shot"));
+    const counter = $("#counter");
+
+    function updateCounter(){
+      // cari yang paling dekat tengah viewport rail
+      const r = rail.getBoundingClientRect();
+      const mid = r.left + r.width/2;
+      let best = 0, bestDist = Infinity;
+      shots.forEach((s, idx)=>{
+        const b = s.getBoundingClientRect();
+        const smid = b.left + b.width/2;
+        const d = Math.abs(smid - mid);
+        if(d < bestDist){ bestDist = d; best = idx; }
+      });
+      counter.textContent = `${best+1} / ${shots.length}`;
+    }
+    rail.addEventListener("scroll", ()=> requestAnimationFrame(updateCounter));
+    updateCounter();
+
+    $("#next").addEventListener("click", ()=>{
+      rail.scrollBy({ left: Math.min(420, rail.clientWidth*0.85), behavior: "smooth" });
+    });
+    $("#prev").addEventListener("click", ()=>{
+      rail.scrollBy({ left: -Math.min(420, rail.clientWidth*0.85), behavior: "smooth" });
+    });
+
+    // ====== LIGHTBOX ======
+    const lb = $("#lightbox");
+    const lbImg = $("#lbImg");
+    const lbLabel = $("#lbLabel");
+    const lbClose = $("#lbClose");
+
+    function openLB(src, label){
+      lb.classList.add("show");
+      lb.setAttribute("aria-hidden","false");
+      lbImg.src = src;
+      lbLabel.textContent = label || "Foto";
+      document.body.style.overflow = "hidden";
+    }
+    function closeLB(){
+      lb.classList.remove("show");
+      lb.setAttribute("aria-hidden","true");
+      document.body.style.overflow = "";
+    }
+
+    shots.forEach(s=>{
+      s.addEventListener("click", ()=>{
+        openLB(s.dataset.src, s.dataset.label);
+      });
+    });
+    // preview click opens current
+    const previewEl = document.querySelector(".preview");
+if(previewEl){
+  previewEl.addEventListener("click", ()=>{
+    openLB(PHOTOS[pvIndex], `Momen ${String(pvIndex+1).padStart(2,"0")}`);
+  });
+}
+
+
+    lbClose.addEventListener("click", closeLB);
+    lb.addEventListener("click", (e)=>{ if(e.target === lb) closeLB(); });
+    window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeLB(); });
+
+    // ====== INTERACTIVE REPLIES (fun tapi classy) ======
+    const replyBox = $("#replyBox");
+    document.querySelectorAll(".choices button").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        replyBox.textContent = btn.dataset.reply;
+      });
+    });
+
+    // ====== LETTER: typing effect ======
+    const typedEl = $("#typed");
+    const btnLetter = $("#btnLetter");
+    const softToggle = $("#softMode");
+
+    let softOn = false;
+    softToggle.addEventListener("click", ()=>{
+      softOn = !softOn;
+      softToggle.classList.toggle("on", softOn);
+      softToggle.setAttribute("aria-checked", softOn ? "true":"false");
+    });
+    softToggle.addEventListener("keydown", (e)=>{
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        softToggle.click();
+      }
+    });
+
+    function typeText(text){
+      typedEl.innerHTML = "";
+      let i = 0;
+      const caret = document.createElement("span");
+      caret.className = "caret";
+      caret.textContent = "▍";
+
+      function step(){
+        typedEl.textContent = text.slice(0, i);
+        typedEl.appendChild(caret);
+        i++;
+        if(i <= text.length){
+          const ch = text[i-1] || "";
+          const delay = (ch === "\n") ? 80 : (ch === "," ? 55 : 22);
+          setTimeout(step, delay);
+        }else{
+          caret.remove();
+        }
+      }
+      step();
+    }
+
+    btnLetter.addEventListener("click", ()=>{
+      const soft = LETTER_SOFT.includes("TULIS") ? "" : LETTER_SOFT;
+      const chosen = softOn && soft ? soft : LETTER_NORMAL;
+      typeText(chosen);
+    });
+
+
+    function setAudioUI(){
+      audDot.style.background = playing ? "rgba(34,197,94,.75)" : "rgba(11,18,32,.35)";
+      btnAudio.textContent = playing ? "Audio aktif" : "Audio";
+      btnAudio.appendChild(audDot);
+    }
+    setAudioUI();
+
+    btnAudio.addEventListener("click", async ()=>{
+      try{
+        if(!playing){
+          await bgm.play();
+          playing = true;
+        }else{
+          bgm.pause();
+          playing = false;
+        }
+        setAudioUI();
+      }catch(err){
+        // jika browser blok autoplay, user harus klik lagi setelah interaksi
+        playing = false;
+        setAudioUI();
+        alert("Kalau audio belum jalan, coba klik tombol Audio sekali lagi ya.");
+      }
+    });
+  </script>
+</body>
+</html>
